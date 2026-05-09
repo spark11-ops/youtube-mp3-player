@@ -1,0 +1,11 @@
+{
+  "name": "youtube-mp3-player",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

@@ -137,7 +137,9 @@
             font-size: 14px;
         }
 
-        input[type="text"] {
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
             width: 100%;
             padding: 18px 20px;
             background: rgba(0, 0, 0, 0.5);
@@ -148,7 +150,9 @@
             transition: all 0.3s;
         }
 
-        input[type="text"]:focus {
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
             outline: none;
             border-color: #ff006e;
             box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
@@ -156,6 +160,90 @@
 
         input::placeholder {
             color: #666;
+        }
+
+        input:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .auth-box,
+        .account-bar {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 0, 110, 0.25);
+            border-radius: 15px;
+            padding: 18px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 18px;
+        }
+
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .auth-tab {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255, 0, 110, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            background: linear-gradient(135deg, #ff006e, #ffbe0b);
+            border-color: transparent;
+        }
+
+        .auth-message {
+            min-height: 20px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #ffbe0b;
+        }
+
+        .auth-message.error {
+            color: #ff6b6b;
+        }
+
+        .account-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .account-email {
+            min-width: 0;
+            color: #ffbe0b;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .signout-btn {
+            flex-shrink: 0;
+            padding: 10px 14px;
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .playlist-box.locked {
+            opacity: 0.62;
         }
 
         .btn {
@@ -285,7 +373,7 @@
 
         .player-grid {
             display: grid;
-            grid-template-columns: 1fr 400px;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
             gap: 30px;
             margin-bottom: 30px;
         }
@@ -297,6 +385,7 @@
             border-radius: 20px;
             padding: 30px;
             backdrop-filter: blur(10px);
+            min-width: 0;
         }
 
         .album-art {
@@ -752,6 +841,80 @@
             display: block;
         }
 
+        .mini-player {
+            position: fixed;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            z-index: 900;
+            display: none;
+            align-items: center;
+            gap: 14px;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 12px 14px;
+            background: rgba(10, 10, 10, 0.94);
+            border: 2px solid rgba(255, 0, 110, 0.35);
+            border-radius: 14px;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .mini-player.active {
+            display: flex;
+        }
+
+        .mini-player img {
+            width: 56px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .mini-player-info {
+            flex: 1;
+            min-width: 0;
+            text-align: left;
+        }
+
+        .mini-player-title {
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .mini-player-channel {
+            font-size: 12px;
+            color: #aaa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .mini-player-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .mini-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .mini-btn.primary {
+            background: linear-gradient(135deg, #ff006e, #ffbe0b);
+        }
+
         @keyframes slideInRight {
             from { transform: translateX(400px); }
             to { transform: translateX(0); }
@@ -792,6 +955,128 @@
             }
         }
 
+        @media (max-width: 640px) {
+            .landing-page,
+            .player-page {
+                padding: 12px;
+            }
+
+            .landing-container {
+                max-width: 100%;
+            }
+
+            .logo {
+                font-size: 48px;
+                margin-bottom: 12px;
+            }
+
+            h1 {
+                font-size: 32px;
+                line-height: 1.1;
+            }
+
+            .subtitle {
+                font-size: 15px;
+                margin-bottom: 22px;
+            }
+
+            .input-box,
+            .auth-box,
+            .account-bar,
+            .main-player,
+            .playlist-sidebar {
+                border-radius: 12px;
+                padding: 16px;
+            }
+
+            .account-bar,
+            .top-bar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .back-btn,
+            .feature-buttons,
+            .feature-btn {
+                width: 100%;
+            }
+
+            .feature-buttons {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .song-title {
+                font-size: 20px;
+                overflow-wrap: anywhere;
+            }
+
+            .controls {
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .control-btn {
+                width: 46px;
+                height: 46px;
+                font-size: 18px;
+            }
+
+            .control-btn.play-pause {
+                width: 64px;
+                height: 64px;
+            }
+
+            .extra-controls {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .extra-btn {
+                padding: 10px 12px;
+                white-space: normal;
+            }
+
+            .playlist-item {
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .playlist-item-thumb {
+                width: 64px;
+                height: 36px;
+            }
+
+            .sleep-timer-popup {
+                width: calc(100% - 24px);
+                min-width: 0;
+                padding: 20px;
+            }
+
+            .timer-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mini-player {
+                left: 8px;
+                right: 8px;
+                bottom: 8px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .extra-controls,
+            .timer-options,
+            .auth-tabs {
+                grid-template-columns: 1fr;
+            }
+
+            .mini-player img {
+                display: none;
+            }
+        }
+
         .error-message {
             background: rgba(255, 0, 0, 0.1);
             border: 2px solid rgba(255, 0, 0, 0.3);
@@ -814,26 +1099,60 @@
             <div class="pro-badge">✨ PRO - AD-FREE</div>
             <p class="subtitle">Play your playlists with advanced features</p>
 
-            <div class="input-box">
+            <div class="auth-box" id="authBox">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="signinTab" type="button">Sign in</button>
+                    <button class="auth-tab" id="signupTab" type="button">Create account</button>
+                </div>
+
                 <div class="input-group">
-                    <label for="apiKey">YouTube API Key</label>
-                    <input 
-                        type="text" 
-                        id="apiKey" 
-                        placeholder="Enter your YouTube API key"
+                    <label for="authEmail">Email</label>
+                    <input
+                        type="text"
+                        id="authEmail"
+                        placeholder="you@example.com"
+                        inputmode="email"
+                        autocomplete="username"
                     >
                 </div>
 
+                <div class="input-group">
+                    <label for="authPassword">Password</label>
+                    <input
+                        type="password"
+                        id="authPassword"
+                        placeholder="At least 8 characters"
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button class="btn btn-primary" id="authSubmitBtn" type="button">
+                    Sign in
+                </button>
+
+                <div class="auth-message" id="authMessage"></div>
+            </div>
+
+            <div class="account-bar hidden" id="accountBar">
+                <div>
+                    <div style="font-size: 12px; color: #aaa;">Signed in as</div>
+                    <div class="account-email" id="accountEmail"></div>
+                </div>
+                <button class="signout-btn" id="signOutBtn" type="button">Sign out</button>
+            </div>
+
+            <div class="input-box playlist-box locked" id="playlistBox">
                 <div class="input-group">
                     <label for="playlistUrl">Playlist URL</label>
                     <input 
                         type="text" 
                         id="playlistUrl" 
                         placeholder="https://www.youtube.com/playlist?list=..."
+                        disabled
                     >
                 </div>
 
-                <button class="btn btn-primary" id="loadPlaylistBtn">
+                <button class="btn btn-primary" id="loadPlaylistBtn" disabled>
                     Load Playlist
                 </button>
 
@@ -975,6 +1294,19 @@
         </div>
     </div>
 
+    <!-- Background Mini Player -->
+    <div class="mini-player" id="miniPlayer">
+        <img id="miniPlayerArt" src="" alt="">
+        <div class="mini-player-info">
+            <div class="mini-player-title" id="miniPlayerTitle">Nothing playing</div>
+            <div class="mini-player-channel" id="miniPlayerChannel"></div>
+        </div>
+        <div class="mini-player-actions">
+            <button class="mini-btn primary" id="miniPlayPauseBtn" type="button" title="Play/Pause">▶</button>
+            <button class="mini-btn" id="openPlayerBtn" type="button" title="Open player">↑</button>
+        </div>
+    </div>
+
     <!-- Notification -->
     <div class="notification" id="notification"></div>
 
@@ -990,18 +1322,29 @@
         let isPlaying = false;
         let isShuffle = false;
         let repeatMode = 0;
-        let apiKey = '';
         let progressInterval;
         let sleepTimerTimeout = null;
         let selectedTimerMinutes = null;
         let adSkipInterval = null;
         let isMuted = false;
         let currentVolume = 100;
+        let currentUser = null;
+        let authMode = 'signin';
 
         // DOM Elements
         const landingPage = document.getElementById('landingPage');
         const playerPage = document.getElementById('playerPage');
-        const apiKeyInput = document.getElementById('apiKey');
+        const authBox = document.getElementById('authBox');
+        const accountBar = document.getElementById('accountBar');
+        const accountEmail = document.getElementById('accountEmail');
+        const authEmail = document.getElementById('authEmail');
+        const authPassword = document.getElementById('authPassword');
+        const authSubmitBtn = document.getElementById('authSubmitBtn');
+        const authMessage = document.getElementById('authMessage');
+        const signinTab = document.getElementById('signinTab');
+        const signupTab = document.getElementById('signupTab');
+        const signOutBtn = document.getElementById('signOutBtn');
+        const playlistBox = document.getElementById('playlistBox');
         const playlistUrlInput = document.getElementById('playlistUrl');
         const loadPlaylistBtn = document.getElementById('loadPlaylistBtn');
         const backBtn = document.getElementById('backBtn');
@@ -1035,16 +1378,135 @@
         const volumeUpBtn = document.getElementById('volumeUpBtn');
         const volumeDownBtn = document.getElementById('volumeDownBtn');
         const muteBtn = document.getElementById('muteBtn');
+        const miniPlayer = document.getElementById('miniPlayer');
+        const miniPlayerArt = document.getElementById('miniPlayerArt');
+        const miniPlayerTitle = document.getElementById('miniPlayerTitle');
+        const miniPlayerChannel = document.getElementById('miniPlayerChannel');
+        const miniPlayPauseBtn = document.getElementById('miniPlayPauseBtn');
+        const openPlayerBtn = document.getElementById('openPlayerBtn');
+
+        async function apiRequest(url, options = {}) {
+            const { headers = {}, ...requestOptions } = options;
+            const response = await fetch(url, {
+                ...requestOptions,
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...headers
+                }
+            });
+
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                throw new Error(data.error || 'Request failed');
+            }
+
+            return data;
+        }
+
+        async function checkSession() {
+            try {
+                const data = await apiRequest('/api/auth/me');
+                currentUser = data.user;
+            } catch {
+                currentUser = null;
+            }
+
+            updateAuthUI();
+        }
+
+        function setAuthMode(mode) {
+            authMode = mode;
+            const isSignup = mode === 'signup';
+            signinTab.classList.toggle('active', !isSignup);
+            signupTab.classList.toggle('active', isSignup);
+            authSubmitBtn.textContent = isSignup ? 'Create account' : 'Sign in';
+            authPassword.autocomplete = isSignup ? 'new-password' : 'current-password';
+            authMessage.textContent = '';
+            authMessage.classList.remove('error');
+        }
+
+        function updateAuthUI() {
+            const signedIn = Boolean(currentUser);
+            authBox.classList.toggle('hidden', signedIn);
+            accountBar.classList.toggle('hidden', !signedIn);
+            playlistBox.classList.toggle('locked', !signedIn);
+            playlistUrlInput.disabled = !signedIn;
+            loadPlaylistBtn.disabled = !signedIn;
+            accountEmail.textContent = signedIn ? currentUser.email : '';
+        }
+
+        async function submitAuth() {
+            authMessage.textContent = '';
+            authMessage.classList.remove('error');
+            authSubmitBtn.disabled = true;
+            authSubmitBtn.textContent = authMode === 'signup' ? 'Creating...' : 'Signing in...';
+
+            try {
+                const data = await apiRequest(`/api/auth/${authMode}`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: authEmail.value.trim(),
+                        password: authPassword.value
+                    })
+                });
+
+                currentUser = data.user;
+                authPassword.value = '';
+                updateAuthUI();
+                showNotification(authMode === 'signup' ? 'Account created' : 'Signed in');
+            } catch (error) {
+                authMessage.textContent = error.message;
+                authMessage.classList.add('error');
+            } finally {
+                authSubmitBtn.disabled = false;
+                authSubmitBtn.textContent = authMode === 'signup' ? 'Create account' : 'Sign in';
+            }
+        }
+
+        async function signOut() {
+            try {
+                await apiRequest('/api/auth/signout', { method: 'POST' });
+            } catch {
+                // The UI should still clear local state if the server session is already gone.
+            }
+
+            currentUser = null;
+            stopPlayback();
+            updateAuthUI();
+            landingPage.style.display = 'flex';
+            playerPage.classList.remove('active');
+            setMiniPlayerVisibility();
+            showNotification('Signed out');
+        }
+
+        function escapeHTML(value) {
+            return String(value || '').replace(/[&<>"']/g, (char) => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[char]));
+        }
 
         // Extract playlist ID
-        function extractPlaylistId(url) {
-            const match = url.match(/[&?]list=([^&]+)/);
-            return match ? match[1] : null;
+        function extractPlaylistId(value) {
+            const input = value.trim();
+            if (/^[a-zA-Z0-9_-]+$/.test(input)) return input;
+
+            try {
+                const parsedUrl = new URL(input);
+                return parsedUrl.searchParams.get('list');
+            } catch {
+                const match = input.match(/[&?]list=([^&]+)/);
+                return match ? match[1] : null;
+            }
         }
 
         // Show error
         function showError(message) {
-            errorContainer.innerHTML = `<div class="error-message">❌ ${message}</div>`;
+            errorContainer.innerHTML = `<div class="error-message">${escapeHTML(message)}</div>`;
         }
 
         // Clear error
@@ -1059,16 +1521,96 @@
             setTimeout(() => notification.classList.remove('active'), 3000);
         }
 
+        function showPlayerPage() {
+            landingPage.style.display = 'none';
+            playerPage.classList.add('active');
+            setMiniPlayerVisibility();
+        }
+
+        function showHomePage() {
+            landingPage.style.display = 'flex';
+            playerPage.classList.remove('active');
+            setMiniPlayerVisibility();
+        }
+
+        function setMiniPlayerVisibility() {
+            const shouldShow = playlist.length > 0 && !playerPage.classList.contains('active');
+            miniPlayer.classList.toggle('active', shouldShow);
+        }
+
+        function updateMiniPlayer() {
+            const song = playlist[currentIndex];
+            if (!song) {
+                miniPlayer.classList.remove('active');
+                return;
+            }
+
+            miniPlayerArt.src = song.thumbnail;
+            miniPlayerTitle.textContent = song.title;
+            miniPlayerChannel.textContent = song.channel;
+            miniPlayPauseBtn.textContent = isPlaying ? '⏸' : '▶';
+            setMiniPlayerVisibility();
+        }
+
+        function updateMediaSession() {
+            if (!('mediaSession' in navigator)) return;
+
+            const song = playlist[currentIndex];
+            if (!song) return;
+
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: song.title,
+                artist: song.channel,
+                album: playlistName.textContent || 'YouTube Playlist',
+                artwork: song.thumbnail ? [
+                    { src: song.thumbnail, sizes: '320x180', type: 'image/jpeg' }
+                ] : []
+            });
+
+            navigator.mediaSession.setActionHandler('play', () => {
+                if (player) player.playVideo();
+            });
+            navigator.mediaSession.setActionHandler('pause', () => {
+                if (player) player.pauseVideo();
+            });
+            navigator.mediaSession.setActionHandler('previoustrack', prevSong);
+            navigator.mediaSession.setActionHandler('nexttrack', nextSong);
+        }
+
+        function stopPlayback() {
+            if (player) {
+                player.stopVideo();
+            }
+
+            playlist = [];
+            currentIndex = 0;
+            isPlaying = false;
+            playlistList.innerHTML = '';
+            playlistCount.textContent = '0 songs';
+            playlistName.textContent = 'Playlist';
+            songTitle.textContent = 'Song Title';
+            artist.textContent = 'Unknown';
+            channel.textContent = 'Unknown';
+            albumArt.src = '';
+            progressFill.style.width = '0%';
+            currentTimeEl.textContent = '0:00';
+            durationEl.textContent = '0:00';
+            miniPlayer.classList.remove('active');
+            stopProgressUpdate();
+
+            if (sleepTimerTimeout) clearTimeout(sleepTimerTimeout);
+            if (adSkipInterval) clearInterval(adSkipInterval);
+        }
+
         // Load playlist
         async function loadPlaylist() {
             clearError();
-            apiKey = apiKeyInput.value.trim();
-            const playlistUrl = playlistUrlInput.value.trim();
-
-            if (!apiKey) {
-                showError('Please enter your YouTube API key');
+            if (!currentUser) {
+                showError('Please sign in before loading a playlist.');
                 return;
             }
+
+            const playlistUrl = playlistUrlInput.value.trim();
 
             const playlistId = extractPlaylistId(playlistUrl);
             if (!playlistId) {
@@ -1080,43 +1622,22 @@
             loadPlaylistBtn.textContent = 'Loading...';
 
             try {
-                const playlistResponse = await fetch(
-                    `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${apiKey}`
-                );
-                const playlistData = await playlistResponse.json();
+                const data = await apiRequest(`/api/playlist?id=${encodeURIComponent(playlistId)}`);
 
-                if (playlistData.error) throw new Error(playlistData.error.message);
-                if (!playlistData.items || playlistData.items.length === 0) throw new Error('Playlist not found');
+                playlistName.textContent = data.title;
 
-                playlistName.textContent = playlistData.items[0].snippet.title;
-
-                let allItems = [];
-                let nextPageToken = '';
-
-                do {
-                    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${apiKey}${nextPageToken ? '&pageToken=' + nextPageToken : ''}`;
-                    const response = await fetch(url);
-                    const data = await response.json();
-
-                    if (data.error) throw new Error(data.error.message);
-
-                    allItems = allItems.concat(data.items);
-                    nextPageToken = data.nextPageToken;
-                } while (nextPageToken);
-
-                playlist = allItems.map((item, index) => ({
-                    id: item.snippet.resourceId.videoId,
-                    title: item.snippet.title,
-                    channel: item.snippet.channelTitle,
-                    thumbnail: item.snippet.thumbnails.medium.url,
+                playlist = data.items.map((item, index) => ({
+                    id: item.id,
+                    title: item.title,
+                    channel: item.channel,
+                    thumbnail: item.thumbnail,
                     index: index
                 }));
 
                 playlistCount.textContent = `${playlist.length} songs`;
                 renderPlaylist();
 
-                landingPage.style.display = 'none';
-                playerPage.classList.add('active');
+                showPlayerPage();
                 loadSong(0);
 
                 showNotification('✅ Playlist loaded!');
@@ -1131,14 +1652,14 @@
         // Render playlist
         function renderPlaylist() {
             playlistList.innerHTML = playlist.map((song, index) => `
-                <div class="playlist-item ${index === currentIndex ? 'active' : ''}" onclick="loadSong(${index})">
+                <div class="playlist-item ${index === currentIndex ? 'active' : ''}" data-index="${index}">
                     <div class="playlist-item-index">${index + 1}</div>
                     <div class="playlist-item-thumb">
-                        <img src="${song.thumbnail}" alt="${song.title}">
+                        <img src="${escapeHTML(song.thumbnail)}" alt="${escapeHTML(song.title)}">
                     </div>
                     <div class="playlist-item-info">
-                        <div class="playlist-item-title">${song.title}</div>
-                        <div class="playlist-item-artist">${song.channel}</div>
+                        <div class="playlist-item-title">${escapeHTML(song.title)}</div>
+                        <div class="playlist-item-artist">${escapeHTML(song.channel)}</div>
                     </div>
                 </div>
             `).join('');
@@ -1178,6 +1699,7 @@
 
         // Load song
         function loadSong(index) {
+            if (!playlist[index]) return;
             currentIndex = index;
             const song = playlist[index];
 
@@ -1185,6 +1707,8 @@
             artist.textContent = song.channel;
             channel.textContent = song.channel;
             albumArt.src = song.thumbnail;
+            updateMiniPlayer();
+            updateMediaSession();
 
             document.querySelectorAll('.playlist-item').forEach((item, i) => {
                 item.classList.toggle('active', i === index);
@@ -1202,7 +1726,10 @@
                     videoId: song.id,
                     playerVars: {
                         autoplay: 1,
-                        controls: 0
+                        controls: 0,
+                        playsinline: 1,
+                        enablejsapi: 1,
+                        origin: window.location.origin
                     },
                     events: {
                         'onReady': onPlayerReady,
@@ -1222,6 +1749,8 @@
             event.target.playVideo();
             isPlaying = true;
             playPauseBtn.textContent = '⏸';
+            updateMiniPlayer();
+            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
             startProgressUpdate();
         }
 
@@ -1236,11 +1765,15 @@
             } else if (event.data === YT.PlayerState.PLAYING) {
                 isPlaying = true;
                 playPauseBtn.textContent = '⏸';
+                updateMiniPlayer();
+                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
                 visualizer.style.opacity = '1';
                 startProgressUpdate();
             } else if (event.data === YT.PlayerState.PAUSED) {
                 isPlaying = false;
                 playPauseBtn.textContent = '▶';
+                updateMiniPlayer();
+                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
                 visualizer.style.opacity = '0.3';
                 stopProgressUpdate();
             }
@@ -1265,6 +1798,9 @@
                 const nextIndex = (currentIndex + 1) % playlist.length;
                 if (nextIndex === 0 && repeatMode === 0) {
                     player.stopVideo();
+                    isPlaying = false;
+                    playPauseBtn.textContent = '▶';
+                    updateMiniPlayer();
                 } else {
                     loadSong(nextIndex);
                 }
@@ -1432,14 +1968,31 @@
         });
 
         // Event Listeners
-        loadPlaylistBtn.addEventListener('click', loadPlaylist);
-        backBtn.addEventListener('click', () => {
-            landingPage.style.display = 'flex';
-            playerPage.classList.remove('active');
-            if (player) player.stopVideo();
-            if (sleepTimerTimeout) clearTimeout(sleepTimerTimeout);
-            if (adSkipInterval) clearInterval(adSkipInterval);
+        signinTab.addEventListener('click', () => setAuthMode('signin'));
+        signupTab.addEventListener('click', () => setAuthMode('signup'));
+        authSubmitBtn.addEventListener('click', submitAuth);
+        signOutBtn.addEventListener('click', signOut);
+        authPassword.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') submitAuth();
         });
+        authEmail.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') submitAuth();
+        });
+        loadPlaylistBtn.addEventListener('click', loadPlaylist);
+        playlistUrlInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') loadPlaylist();
+        });
+        playlistList.addEventListener('click', (event) => {
+            const item = event.target.closest('.playlist-item');
+            if (!item) return;
+            loadSong(Number(item.dataset.index));
+        });
+        backBtn.addEventListener('click', () => {
+            showHomePage();
+            showNotification(isPlaying ? 'Playing in background' : 'Player minimized');
+        });
+        openPlayerBtn.addEventListener('click', showPlayerPage);
+        miniPlayPauseBtn.addEventListener('click', togglePlayPause);
         playPauseBtn.addEventListener('click', togglePlayPause);
         nextBtn.addEventListener('click', nextSong);
         prevBtn.addEventListener('click', prevSong);
@@ -1481,6 +2034,8 @@
                 }
             }
         });
+
+        checkSession();
     </script>
 </body>
 </html>
